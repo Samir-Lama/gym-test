@@ -1,0 +1,169 @@
+---
+const features = [
+  {
+    title: "Member Management",
+    desc: "Track memberships, renewals, and check-ins in one dashboard. No more spreadsheets.",
+    icon: "💪",
+  },
+  {
+    title: "Class Scheduling",
+    desc: "Create classes, manage capacity, and let members book from their phone.",
+    icon: "📅",
+  },
+  {
+    title: "Billing & Payments",
+    desc: "Automated invoicing, dues reminders, and payment tracking built-in.",
+    icon: "💳",
+  },
+  {
+    title: "Trainer Dashboard",
+    desc: "Assign workouts, track progress, and message clients directly.",
+    icon: "🏋️",
+  },
+  {
+    title: "Reports & Insights",
+    desc: "See revenue, retention, and attendance trends at a glance.",
+    icon: "📊",
+  },
+  {
+    title: "Access Control",
+    desc: "QR check-in and role-based access for staff and trainers.",
+    icon: "🔐",
+  },
+];
+
+const plans = [
+  { name: "Starter", price: "$29", per: "/mo", desc: "For small studios getting started", cta: "Start free trial", featured: false, points: ["Up to 100 members", "Class scheduling", "Email support"] },
+  { name: "Pro", price: "$79", per: "/mo", desc: "For growing gyms", cta: "Start free trial", featured: true, points: ["Up to 1,000 members", "Billing & payments", "Trainer dashboard", "Priority support"] },
+  { name: "Scale", price: "Custom", per: "", desc: "For chains & franchises", cta: "Talk to sales", featured: false, points: ["Unlimited members", "Multi-location", "API access", "Dedicated manager"] },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PulseFit — Gym Management Made Simple</title>
+    <meta name="description" content="PulseFit is the all-in-one gym management platform for members, classes, billing and trainers." />
+    <style>
+      :root { --bg:#0a0a0b; --card:#141416; --muted:#a1a1aa; --accent:#d4ff3f; --accent2:#7c3aed; }
+      * { box-sizing:border-box; margin:0; padding:0; }
+      body { font-family: ui-sans-system, system-ui, -apple-system, Segoe, Roboto, sans-serif; background:var(--bg); color:#fafafa; line-height:1.6; }
+      a { color:inherit; text-decoration:none; }
+      .wrap { max-width:1120px; margin:0 auto; padding:0 24px; }
+      nav { display:flex; justify-content:space-between; align-items:center; padding:20px 0; }
+      .logo { font-weight:800; font-size:22px; letter-spacing:-0.5px; }
+      .logo span { color:var(--accent); }
+      .nav-links { display:flex; gap:28px; color:var(--muted); font-size:15px; }
+      .btn { display:inline-block; padding:12px 24px; border-radius:999px; font-weight:600; font-size:15px; transition:.2s; }
+      .btn-primary { background:var(--accent); color:#111; }
+      .btn-primary:hover { transform:translateY(-1px); }
+      .btn-ghost { border:1px solid #2a2a2e; color:#fff; }
+      .hero { text-align:center; padding:80px 0 60px; }
+      .badge { display:inline-block; background:#1c1c1f; border:1px solid #2a2a2e; padding:6px 14px; border-radius:999px; font-size:13px; color:var(--muted); margin-bottom:20px; }
+      h1 { font-size:clamp(40px,6vw,68px); line-height:1.05; letter-spacing:-2px; font-weight:800; margin-bottom:18px; }
+      h1 span { color:var(--accent); }
+      .sub { color:var(--muted); font-size:19px; max-width:640px; margin:0 auto 32px; }
+      .cta-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+      .mock { margin:60px auto 0; max-width:900px; background:linear-gradient(180deg,#17171a,#101012); border:1px solid #26262b; border-radius:16px; padding:18px; }
+      .mock-bar { display:flex; gap:8px; margin-bottom:16px; }
+      .dot { width:12px; height:12px; border-radius:50%; background:#2e2e33; }
+      .mock-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+      .stat { background:var(--card); border:1px solid #232327; border-radius:12px; padding:20px; text-align:left; }
+      .stat b { font-size:28px; display:block; }
+      .stat small { color:var(--muted); }
+      section { padding:80px 0; }
+      h2 { font-size:36px; letter-spacing:-1px; text-align:center; margin-bottom:12px; }
+      .sec-sub { text-align:center; color:var(--muted); margin-bottom:48px; }
+      .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; }
+      .card { background:var(--card); border:1px solid #232327; border-radius:16px; padding:28px; }
+      .card .icon { font-size:32px; margin-bottom:12px; }
+      .card h3 { margin-bottom:8px; font-size:19px; }
+      .card p { color:var(--muted); font-size:15px; }
+      .pricing { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
+      .price-card { background:var(--card); border:1px solid #232327; border-radius:18px; padding:32px; position:relative; }
+      .price-card.featured { border-color:var(--accent); background:#151507; }
+      .price-card h3 { font-size:20px; margin-bottom:6px; }
+      .price { font-size:42px; font-weight:800; margin:12px 0; }
+      .price small { font-size:16px; color:var(--muted); font-weight:400; }
+      ul { list-style:none; margin:18px 0 24px; }
+      ul li { padding:8px 0; color:#d4d4d8; font-size:15px; }
+      ul li::before { content:"✓ "; color:var(--accent); font-weight:700; }
+      footer { border-top:1px solid #1f1f23; padding:40px 0; color:var(--muted); font-size:14px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+      @media(max-width:640px){ .nav-links{display:none} .mock-grid{grid-template-columns:1fr} }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav>
+        <div class="logo">PulseFit<span>.</span></div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#demo">Demo</a>
+        </div>
+        <a class="btn btn-primary" href="#pricing">Get Started</a>
+      </nav>
+
+      <div class="hero">
+        <div class="badge">New: QR check-in + mobile bookings</div>
+        <h1>Run your gym,<br/>not your <span>spreadsheets</span></h1>
+        <p class="sub">PulseFit is the all-in-one platform for memberships, classes, billing, and trainers — built for gyms that want to grow.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#pricing">Start free 14-day trial</a>
+          <a class="btn btn-ghost" href="#demo">Watch demo</a>
+        </div>
+
+        <div class="mock" id="demo">
+          <div class="mock-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          <div class="mock-grid">
+            <div class="stat"><b>1,240</b><small>Active members</small></div>
+            <div class="stat"><b>96%</b><small>Retention rate</small></div>
+            <div class="stat"><b>$18.4k</b><small>MRR this month</small></div>
+          </div>
+        </div>
+      </div>
+
+      <section id="features">
+        <h2>Everything you need</h2>
+        <p class="sec-sub">One login for owners, staff, trainers and members.</p>
+        <div class="grid">
+          {features.map(f => (
+            <div class="card">
+              <div class="icon">{f.icon}</div>
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="pricing">
+        <h2>Simple pricing</h2>
+        <p class="sec-sub">Start free, upgrade when you grow. No hidden fees.</p>
+        <div class="pricing">
+          {plans.map(p => (
+            <div class={`price-card ${p.featured ? 'featured' : ''}`}>
+              <h3>{p.name}</h3>
+              <p style="color:var(--muted); font-size:14px">{p.desc}</p>
+              <div class="price">{p.price}<small>{p.per}</small></div>
+              <ul>{p.points.map(pt => <li>{pt}</li>)}</ul>
+              <a class={`btn ${p.featured ? 'btn-primary' : 'btn-ghost'}`} href="#" style="width:100%; text-align:center">{p.cta}</a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style="text-align:center">
+        <h2>Ready to grow your gym?</h2>
+        <p class="sec-sub">Join 500+ gyms running on PulseFit.</p>
+        <a class="btn btn-primary" href="#pricing" style="font-size:17px; padding:14px 32px">Get started free</a>
+      </section>
+
+      <footer>
+        <div>© 2026 PulseFit. Built with Astro.</div>
+        <div>Deploys via GitHub Pages</div>
+      </footer>
+    </div>
+  </body>
+</html>
